@@ -40,7 +40,7 @@ const callSearchApi = () => {
  */
 const printResult = result => {
     const h4 = document.createElement('h4');
-    h4.innerHTML = `Here is your search result for "${searchText}"`;
+    h4.innerHTML = `Here is your search result for "${searchText}:"`;
 
     //If no phone found
     if (result.length == 0) {
@@ -75,8 +75,8 @@ const singleColumn = item => {
     div.classList.add('col-lg-4');
     div.classList.add('col-12');
     div.innerHTML = `
-    <div class="card w-full">
-        <img src="${item.image}" class="card-img-top" alt="${item.phone_name}">
+    <div class="card w-full text-center p-3 bg-light pt-4">
+        <img src="${item.image}" class="mx-auto card-img-top" alt="${item.phone_name}">
         <div class="card-body">
             <h5 class="card-title">${item.phone_name}</h5>
             <p class="card-text"><strong>Brand:</strong> ${item.brand}</p>

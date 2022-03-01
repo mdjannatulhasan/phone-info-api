@@ -9,6 +9,8 @@
     max-width: 200px !important;
     padding-left: 16px;
 }
+
+/* Phone details class */
 #phoneDetails .col-title{
     font-weight: 700;
 }
