@@ -25,6 +25,7 @@ const callSearchApi = () => {
             .then(data => printResult(data.data));
         spinner.classList.toggle('d-none');
         clearResultBox();
+        phoneDetailsBox.innerHTML = '';
     } else {
         clearResultBox();
         const h4 = document.createElement('h4');
