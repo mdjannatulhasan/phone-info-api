@@ -19,8 +19,16 @@ const printResult = result => {
     resultBox.appendChild(h4);
     let count = 0;
     for(const item of result) {
-        if(count > 19){
+        if(count >= 20){
+            const btn = document.createElement('button');
+            btn.classList.add('btn');
+            btn.classList.add('btn-success');
+            btn.classList.add('mt-5');
+            btn.setAttribute('id','showMore')
+            btn.innerHTML = 'Show All'
+            resultBox.appendChild(btn);
             break;
+
         }
         const div = document.createElement('div');
         div.classList.add('col-lg-4');
@@ -37,8 +45,6 @@ const printResult = result => {
         `;
         resultBox.appendChild(div);
         count++;
-        
-        
     };
 }
 searchBtn.addEventListener('click', callApi);
