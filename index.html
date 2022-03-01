@@ -36,11 +36,22 @@
         <div class="container">
             <h1 class="text-center mb-5" >Search your desiered phone's information</h1>
             <div class="w-50 mx-auto d-flex">
-                <input class="form-control me-2" id="search" type="search" placeholder="Type Phone Name or Brand" aria-label="Search">
-                <button class="btn btn-success" type="submit">Search</button>
+                <input class="form-control me-2" id="searchBox" type="search" placeholder="Type Phone Name or Brand" aria-label="Search">
+                <button class="btn btn-success" id="search" type="submit">Search</button>
+            </div>
+            <div class="spinner-container text-center mt-3 d-none">
+                <div class="spinner-border text-primary mx-auto" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+            </div>
+            <div class="phone-search-result">
+                <div class="row" id="result-container">
+
+                </div>
             </div>
         </div>
     </section>
+
     <footer class="bg-info py-5 text-center">
         <p class="mb-0">©All right reserved, 2022</p>
     </footer>
