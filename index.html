@@ -32,7 +32,7 @@
           </nav>
     </section>
 
-    <''>
+    <!-- Api result Box -->
     <section class="my-5 api-container">
         <div class="container">
             <h1 class="text-center mb-5" >Search your desiered phone's information</h1>
@@ -40,19 +40,27 @@
                 <input class="form-control me-2" id="searchBox" type="search" placeholder="Type Phone Name or Brand" aria-label="Search">
                 <button class="btn btn-success" id="search" type="submit">Search</button>
             </div>
+
+            <!-- Spinner -->
             <div class="text-center mt-3 d-none" id="spinnerContainer">
                 <div class="spinner-border text-primary mx-auto" role="status">
                     <span class="visually-hidden">Loading...</span>
                   </div>
             </div>
+
+            <!-- Phone Details will show here -->
             <div id="phoneDetails" class="my-4">
                 
             </div>
+
+            <!-- Search Result will show here -->
             <div class="phone-search-result mt-5">
                 <div class="row g-4" id="resultContainer">
 
                 </div>
             </div>
+
+            <!-- Show All button -->
             <button id="showAll" class="btn btn-success d-none">Show All</button>
         </div>
     </section>
