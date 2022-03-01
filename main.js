@@ -5,9 +5,11 @@ const searchBox = document.getElementById('searchBox');
 const spinner = document.getElementById('spinnerContainer');
 const resultBox = document.getElementById('resultContainer');
 const phoneDetailsBox = document.getElementById('phoneDetails');
+let showAll = document.getElementById('showAll');
 
 
 let searchText = '';
+let resultData;
 
 
 /**
@@ -47,42 +49,43 @@ const printResult = result => {
         spinner.classList.toggle('d-none');
         return;
     }
-    console.log(result);
+    resultData = result;
     searchBox.value = '';
-
+    showAll.classList.add('d-none');
     resultBox.appendChild(h4);
     let count = 0;
     for (const item of result) {
         if (count >= 20) {
-            const btn = document.createElement('button');
-            btn.classList.add('btn');
-            btn.classList.add('btn-success');
-            btn.classList.add('mt-5');
-            btn.setAttribute('id', 'showMore');
-            btn.innerHTML = 'Show All';
-            resultBox.appendChild(btn);
+            showAll.classList.toggle('d-none');
             break;
         }
 
-        //Single column containing single item from search response
-        const div = document.createElement('div');
-        div.classList.add('col-lg-4');
-        div.classList.add('col-12');
-        div.innerHTML = `
-        <div class="card w-full">
-            <img src="${item.image}" class="card-img-top" alt="${item.phone_name}">
-            <div class="card-body">
-                <h5 class="card-title">${item.phone_name}</h5>
-                <p class="card-text"><strong>Brand:</strong> ${item.brand}</p>
-                <a href="#" onclick="detailsBox('${item.slug}')" class="btn btn-primary">Details</a>
-            </div>
-        </div>
-        `;
-        resultBox.appendChild(div);
+        singleColumn(item);
         count++;
     };
     spinner.classList.toggle('d-none');
 }
+
+/**
+ * Function for creating single phone card
+ */
+const singleColumn = item => {
+    //Single column containing single item from search response
+    const div = document.createElement('div');
+    div.classList.add('col-lg-4');
+    div.classList.add('col-12');
+    div.innerHTML = `
+    <div class="card w-full">
+        <img src="${item.image}" class="card-img-top" alt="${item.phone_name}">
+        <div class="card-body">
+            <h5 class="card-title">${item.phone_name}</h5>
+            <p class="card-text"><strong>Brand:</strong> ${item.brand}</p>
+            <a href="#" onclick="detailsBox('${item.slug}')" class="btn btn-primary">Details</a>
+        </div>
+    </div>
+    `;
+    resultBox.appendChild(div);
+};
 
 /**
  * Function for clearing Result Container
@@ -209,4 +212,22 @@ const detailsTable = phoneInfo => {
     console.log(phoneInfo);
 }
 
+/**
+ * Function for Creating all listed phone
+ */
+const displayFullItemList = () => {
+    let count = 0;
+
+    for (const item of resultData) {
+        if (count < 20) {
+
+            count++;
+            continue;
+        }
+        singleColumn(item);
+
+    };
+    showAll.classList.toggle('d-none');
+}
 searchBtn.addEventListener('click', callSearchApi);
+showAll.addEventListener('click', displayFullItemList);
