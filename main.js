@@ -87,7 +87,7 @@ const printResult = result => {
 /**
  * Function for clearing Result Container
  */
- const clearResultBox = () =>{
+const clearResultBox = () => {
     resultBox.innerHTML = '';
 }
 
@@ -95,19 +95,117 @@ const printResult = result => {
 /**
  * Function for details box creation
  */
- const detailsBox = phone =>{
+const detailsBox = phone => {
     const phoneDetails = fetch(`https://openapi.programming-hero.com/api/phone/${phone}`)
-                                .then(res => res.json())
-                                .then(singledData => detailsTable(singledData.data));
+        .then(res => res.json())
+        .then(singledData => detailsTable(singledData.data));
 }
 
+/**
+ * Function for Creating table with data
+ */
 const detailsTable = phoneInfo => {
-    phoneDetailsBox.innerHTML ='';
+    phoneDetailsBox.innerHTML = '';
     const box = document.createElement('div');
     box.classList.add('phone-details');
+    let releaseDate = phoneInfo.releaseDate;
+    if (releaseDate == '') {
+        releaseDate = 'No release date yet';
+    }
+    let sensors = (phoneInfo.mainFeatures.sensors).map(element => ' ' + element.charAt(0).toUpperCase() + element.slice(1));
+    let sensors2 = sensors.toString();
     box.innerHTML = `
-    
+    <div class="info-body" id="infoBody">
+
+        <div class="row">
+            <div class="col-12 d-flex flex-column align-items-center justify-content-center border-end-0">
+                <img class="mt-3" src="${phoneInfo.image}" alt="${phoneInfo.name}">
+                <h4 class="mt-4 title">${phoneInfo.name}</h4>
+                <p><span class="col-title">Release Date: </span> ${releaseDate}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-title">
+                Brand
+            </div>
+            <div class="col-8">${phoneInfo.brand}</div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-title">
+                Main Features
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-title">Chipset</div>
+            <div class="col-8">${phoneInfo.mainFeatures.chipSet}</div>
+        </div>
+
+        <div class="row">
+            <div class="col-4 col-title">
+                Display Size
+            </div>
+            <div class="col-8">${phoneInfo.mainFeatures.displaySize}</div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-title">
+                Memory
+            </div>
+            <div class="col-8">${phoneInfo.mainFeatures.memory}</div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-title">
+                Sensors
+            </div>
+            <div class="col-8">
+            ${sensors2}
+            </div >
+        </div >
+        <div class="row">
+            <div class="col-4 col-title">
+                Storage
+            </div>
+            <div class="col-8">${phoneInfo.mainFeatures.storage}</div>
+        </div>
+    </div >
     `;
+
+    phoneDetailsBox.appendChild(box);
+    if (phoneInfo.hasOwnProperty('others')) {
+
+        const othersDiv = document.createElement('div');
+        othersDiv.innerHTML = `
+        <div class="row">
+            <div class="col-12 col-title">
+                Others
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-title">Bluetooth</div>
+            <div class="col-8">${phoneInfo.others.Bluetooth}</div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-title">GPS</div>
+            <div class="col-8">${phoneInfo.others.GPS}</div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-title">NFC</div>
+            <div class="col-8">${phoneInfo.others.NFC}</div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-title">Radio</div>
+            <div class="col-8">${phoneInfo.others.Radio}</div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-title">USB</div>
+            <div class="col-8">${phoneInfo.others.USB}</div>
+        </div>
+        <div class="row">
+            <div class="col-4 col-title">WLAN</div>
+            <div class="col-8">${phoneInfo.others.WLAN}</div>
+        </div>
+        `;
+        document.getElementById('infoBody').appendChild(othersDiv);
+    }
     console.log(phoneInfo);
 }
 

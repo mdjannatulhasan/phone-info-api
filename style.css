@@ -9,3 +9,20 @@
     max-width: 200px !important;
     padding-left: 16px;
 }
+#phoneDetails .col-title{
+    font-weight: 700;
+}
+#phoneDetails .row{
+    --bs-gutter-x: 0 !important;
+}
+#phoneDetails{
+    max-width: 900px;
+    margin: auto;
+}
+#phoneDetails .row div{
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+}
+.info-body{
+    border: 1px solid #e5e5e5;
+}
