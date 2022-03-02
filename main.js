@@ -28,6 +28,7 @@ const callSearchApi = () => {
         phoneDetailsBox.innerHTML = '';
     } else {
         clearResultBox();
+        phoneDetailsBox.innerHTML = '';
         const h4 = document.createElement('h4');
         h4.classList.add('text-center');
         h4.classList.add('text-danger');
@@ -45,6 +46,8 @@ const printResult = result => {
     h4.innerHTML = `Here is your search result for "${searchText}":`;
 
     showAll.classList.add('d-none');
+    searchBox.value = '';
+
     //If no phone found
     if (result.length == 0) {
         h4.innerHTML = `No phone found`;
@@ -53,7 +56,7 @@ const printResult = result => {
         return;
     }
     resultData = result;
-    searchBox.value = '';
+
     resultBox.appendChild(h4);
     let count = 0;
     for (const item of result) {
